@@ -221,6 +221,11 @@ class Object:
             - ani_registry: the Animation Registry object from animation.py
             - m_motion: list | holds x movement and y movement
             - touching: Touching object | determines if object is touching on each side of the rect
+
+        Object identification
+            - object type: str
+            - name: str
+            - data: dict [for extra data in serialization]
         """
         # object identification
         self.object_id = 0
@@ -364,10 +369,23 @@ class PersistentObject(Object):
     Not include:
     - particles
     - background effects
-    
     """
     def __init__(self, object_type_name=REG_P_OBJECT_KEY):
-        """ Constructor for Persistent Object class"""
+        """
+        Constructor for Persistent Object class
+            
+            Contains data:
+                - object id: int
+                - rect: Rect object
+                - ani_registry: the Animation Registry object from animation.py
+                - m_motion: list | holds x movement and y movement
+                - touching: Touching object | determines if object is touching on each side of the rect
+
+            Object identification
+                - object type: str
+                - name: str
+                - data: dict [for extra data in serialization]
+        """
         super().__init__(object_type_name)
 
 
