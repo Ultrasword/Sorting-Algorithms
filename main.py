@@ -32,14 +32,23 @@ SORTER.setup_sorter(100)
 SORTER.randomize()
 
 CONTROLLER = MAIN.create_child(0.81, 0.01, 0.99, 0.99, ctype=controller.Controller)
+CONTROLLER.set_fill_color((10, 10, 10))
 
 def randomize(button):
     print("Randomizing")
     SORTER.randomize()
 
-test = CONTROLLER.create_child(0.1, 0.1, 0.4, 0.15, ctype=button.Button)
-test.set_text("Randomize")
-test.set_on_click(randomize)
+def sort(button):
+    print("sort?")
+
+RNG = CONTROLLER.create_child(0.1, 0.1, 0.4, 0.15, ctype=button.Button)
+RNG.set_text("Randomize")
+RNG.set_on_click(randomize)
+
+SORT = CONTROLLER.create_child(0.5, 0.1, 0.8, 0.15, ctype=button.Button)
+SORT.set_text("Sort!")
+SORT.set_on_click(sort)
+
 # ----------------------------------------------------------------------- #
 
 

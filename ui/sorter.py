@@ -12,7 +12,7 @@ class Sorter(box.Box):
         self.values = []
         self.value_color = (255, 255, 255)
         self.value_width = 0
-        self.padding = (5, 5)
+        self.padding = (self.rect.w * 0.01, self.rect.h * 0.01)
     
     def setup_sorter(self, value_count: int):
         self.value_count = value_count
