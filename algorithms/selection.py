@@ -1,5 +1,7 @@
-from . import algo
+from ui import algo
 
+
+NAME = "SelectionSort"
 
 class SelectionSort(algo.Algo):
     def __init__(self):
@@ -7,7 +9,6 @@ class SelectionSort(algo.Algo):
     
     def sort_step(self):
         pass
-
 
 
 

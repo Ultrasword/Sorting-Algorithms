@@ -6,7 +6,7 @@ from engine import filehandler, maths, animation, state, serialize
 from engine import spritesheet, core_utils
 from engine.globals import *
 
-from ui import box, sorter, controller, button
+from ui import box, sorter, controller, button, algo_selection
 
 # create essential instances
 window.create_instance("Sorting", 1280, 720, f=pygame.RESIZABLE)
@@ -45,6 +45,10 @@ RNG.set_on_click(randomize)
 SORT = CONTROLLER.create_child(0.5, 0.1, 0.8, 0.15, ctype=button.Button)
 SORT.set_text("Sort!")
 SORT.set_on_click(SORTER.sort)
+
+ALGOSEL = CONTROLLER.create_child(0.1, 0.2, 0.9, 0.7, ctype=algo_selection.AlgoSelection)
+ALGOSEL.set_sorter_object(SORTER)
+ALGOSEL.setup()
 
 # ----------------------------------------------------------------------- #
 

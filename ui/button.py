@@ -36,6 +36,7 @@ class Button(box.Box):
         if self.dirty:
             self.dirty = False
             self.surface.fill(self.fill_color)
+            self.render_children()
             # render the text in the center
             if self.text_render:
                 self.surface.blit(self.text_render, self.text_rect)

@@ -22,6 +22,9 @@ class Sorter(box.Box):
         else:
             print("No algorithm chosen!")
 
+    def set_algorithm(self, algo):
+        self.current_algorithm = algo
+
     def setup_sorter(self, value_count: int):
         self.value_count = value_count
         self.values = [(self.rect.h-self.padding[1]*2) * (i/value_count) for i in range(value_count)]
@@ -37,6 +40,7 @@ class Sorter(box.Box):
         if self.dirty:
             self.dirty = False
             self.surface.fill(self.fill_color)
+            self.render_children()
             # now we draw the values
             for i in range(self.value_count):
                 x, y = i * self.value_width, self.rect.h - self.values[i]
@@ -47,4 +51,7 @@ class Sorter(box.Box):
         self.dirty = True
         old = self.values.copy()
         self.values = [i for i in sample(old, self.value_count)]
+
+    def update_window(self):
+        pass
 

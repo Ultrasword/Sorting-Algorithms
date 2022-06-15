@@ -20,6 +20,7 @@ class Box(handler.PersistentObject):
         self.parent = parent
         self.frect = handler.Rect(left, top, right, bottom)
         self.rect = handler.Rect(0, 0, 0, 0)
+        self.rel_pos = handler.Rect(0, 0, 0, 0)
 
         # properties
         self.dirty = True
@@ -32,11 +33,15 @@ class Box(handler.PersistentObject):
 
     def create(self):
         if self.parent:
+            self.rel_pos.pos = (self.parent.rect.w * self.frect.x, self.parent.rect.h * self.frect.y)
+            self.rel_pos.area = (self.parent.rect.w * (self.frect.w-self.frect.x), self.parent.rect.h * (self.frect.h - self.frect.y))
             self.rect.pos = (self.parent.rect.x + self.parent.rect.w * self.frect.x, self.parent.rect.y + self.parent.rect.h * self.frect.y)
             self.rect.area = (self.parent.rect.w * (self.frect.w-self.frect.x), self.parent.rect.h * (self.frect.h - self.frect.y))
         else:
             self.rect.pos = (window.WIDTH * self.frect.x, window.HEIGHT * self.frect.y)
             self.rect.area = (window.WIDTH * (self.frect.w-self.frect.x), window.HEIGHT * (self.frect.h - self.frect.y))
+            self.rel_pos.pos = self.rect.pos
+            self.rel_pos.area = self.rect.area
         
         self.surface = filehandler.make_surface(int(self.rect.w), int(self.rect.h))
     
@@ -53,10 +58,18 @@ class Box(handler.PersistentObject):
         if self.dirty:
             self.dirty = False
             self.surface.fill(self.fill_color)
+            self.render_children()
     
     def render(self):
-        window.get_framebuffer_for_draw().blit(self.surface, self.rect.topleft)
-    
+        if not self.parent:
+            window.get_framebuffer_for_draw().blit(self.surface, self.rect.topleft)
+        else:
+            self.parent.surface.blit(self.surface, self.rel_pos.topleft)
+        
+    def render_children(self):
+        for child in self.children:
+            child.render()
+
     # utility functions
     def is_hovering(self):
         mpos = user_input.get_mouse_pos()
