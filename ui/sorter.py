@@ -13,7 +13,15 @@ class Sorter(box.Box):
         self.value_color = (255, 255, 255)
         self.value_width = 0
         self.padding = (self.rect.w * 0.01, self.rect.h * 0.01)
-    
+        self.current_algorithm = None
+
+    def sort(self, button):
+        if self.current_algorithm:
+            print("Sorting!")
+            self.current_algorithm.is_sorting = True
+        else:
+            print("No algorithm chosen!")
+
     def setup_sorter(self, value_count: int):
         self.value_count = value_count
         self.values = [(self.rect.h-self.padding[1]*2) * (i/value_count) for i in range(value_count)]
@@ -21,8 +29,11 @@ class Sorter(box.Box):
 
     def set_value_color(self, color):
         self.value_color = color
-    
+
     def update(self, dt):
+        if self.current_algorithm and self.current_algorithm.is_sorting:
+            self.dirty = True
+            self.current_algorithm.sort_step()
         if self.dirty:
             self.dirty = False
             self.surface.fill(self.fill_color)

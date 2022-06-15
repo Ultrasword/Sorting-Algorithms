@@ -38,16 +38,13 @@ def randomize(button):
     print("Randomizing")
     SORTER.randomize()
 
-def sort(button):
-    print("sort?")
-
 RNG = CONTROLLER.create_child(0.1, 0.1, 0.4, 0.15, ctype=button.Button)
 RNG.set_text("Randomize")
 RNG.set_on_click(randomize)
 
 SORT = CONTROLLER.create_child(0.5, 0.1, 0.8, 0.15, ctype=button.Button)
 SORT.set_text("Sort!")
-SORT.set_on_click(sort)
+SORT.set_on_click(SORTER.sort)
 
 # ----------------------------------------------------------------------- #
 
