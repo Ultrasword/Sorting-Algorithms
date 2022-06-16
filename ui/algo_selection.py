@@ -37,9 +37,9 @@ class AlgoSelection(box.Box):
             self.algorithms[mod.NAME] = algo
             but.set_on_click(self._on_click)
             left += width
-            top += height
             if left >= 1:
                 left = 0
+                top += height
     
     def update(self, dt):
         if self.dirty:

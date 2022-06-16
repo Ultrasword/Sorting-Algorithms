@@ -11,3 +11,5 @@ class Algo:
     def sort_step(self):
         print("Sort")
     
+    def setup(self):
+        pass

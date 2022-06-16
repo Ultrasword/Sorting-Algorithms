@@ -17,8 +17,8 @@ class Sorter(box.Box):
 
     def sort(self, button):
         if self.current_algorithm:
-            print("Sorting!")
-            self.current_algorithm.is_sorting = True
+            print("Start Sort!")
+            self.current_algorithm.setup()
         else:
             print("No algorithm chosen!")
 
@@ -52,6 +52,8 @@ class Sorter(box.Box):
         old = self.values.copy()
         self.values = [i for i in sample(old, self.value_count)]
 
-    def update_window(self):
-        pass
+    def swap_values(self, left: int, right: int):
+        t = self.values[left]
+        self.values[left] = self.values[right]
+        self.values[right] = t
 
