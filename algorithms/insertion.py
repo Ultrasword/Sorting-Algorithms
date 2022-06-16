@@ -18,7 +18,7 @@ class InsertionSort(algo.Algo):
     def sort_step(self):
         if self.pointer1 >= self._end:
             self.is_sorting = False
-            print("Finished")
+            self.output_timer()
             return
         
         if self.pointer1 <= 0:

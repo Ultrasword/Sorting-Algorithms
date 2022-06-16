@@ -17,7 +17,7 @@ class SelectionSort(algo.Algo):
     def sort_step(self):
         if self._min_i >= self._end:
             self.is_sorting = False
-            print("Finished")
+            self.output_timer()
             return
         # find the lowest val at each iteration
         lowest_index = 0

@@ -19,6 +19,7 @@ class Sorter(box.Box):
         if self.current_algorithm:
             print("Start Sort!")
             self.current_algorithm.setup()
+            self.current_algorithm.init_timer()
         else:
             print("No algorithm chosen!")
 
@@ -28,7 +29,9 @@ class Sorter(box.Box):
     def setup_sorter(self, value_count: int):
         self.value_count = value_count
         self.values = [(self.rect.h-self.padding[1]*2) * (i/value_count) for i in range(value_count)]
-        self.value_width = (self.rect.w-self.padding[0] * 2) // self.value_count
+        self.value_width = round((self.rect.w-self.padding[0] * 2) / self.value_count)
+        print(self.rect)
+        print(self.value_count, self.value_width)
 
     def set_value_color(self, color):
         self.value_color = color
