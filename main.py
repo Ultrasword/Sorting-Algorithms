@@ -27,6 +27,7 @@ MAIN = box.add_box_to_state(0, 0, 1, 1)
 
 SORTER = MAIN.create_child(0.01, 0.01, 0.79, 0.99, ctype=sorter.Sorter)
 SORTER.set_value_color((255, 0, 0))
+SORTER.set_value_current_color((0, 0, 255))
 SORTER.setup_sorter(500)
 # randomize
 SORTER.randomize()

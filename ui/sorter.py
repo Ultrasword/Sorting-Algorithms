@@ -11,6 +11,8 @@ class Sorter(box.Box):
         self.value_count = 0
         self.values = []
         self.value_color = (255, 255, 255)
+        self.value_current_color = (255, 0, 0)
+        self.current_pointer = 0
         self.value_width = 0
         self.padding = (self.rect.w * 0.01, self.rect.h * 0.01)
         self.current_algorithm = None
@@ -36,6 +38,9 @@ class Sorter(box.Box):
     def set_value_color(self, color):
         self.value_color = color
 
+    def set_value_current_color(self, color):
+        self.value_current_color = color
+
     def update(self, dt):
         if self.current_algorithm and self.current_algorithm.is_sorting:
             self.dirty = True
@@ -48,7 +53,10 @@ class Sorter(box.Box):
             for i in range(self.value_count):
                 x, y = i * self.value_width, self.rect.h - self.values[i]
                 w, h = self.value_width, self.rect.h
-                draw.DRAW_RECT(self.surface, self.value_color, (x, y, w, h))
+                if i == self.current_pointer:
+                    draw.DRAW_RECT(self.surface, self.value_current_color, (x, y, w, h))
+                else:
+                    draw.DRAW_RECT(self.surface, self.value_color, (x, y, w, h))
 
     def randomize(self):
         self.dirty = True
@@ -56,6 +64,7 @@ class Sorter(box.Box):
         self.values = [i for i in sample(old, self.value_count)]
 
     def swap_values(self, left: int, right: int):
+        self.current_pointer = left
         t = self.values[left]
         self.values[left] = self.values[right]
         self.values[right] = t
