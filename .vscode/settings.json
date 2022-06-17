@@ -1,7 +1,6 @@
 {
   "files.autoSave": "onFocusChange",
   "git.ignoreLimitWarning": true,
-  "editor.fontFamily": "Consolas, Calibri, monospace",
   "editor.renderWhitespace": "trailing",
   "editor.cursorStyle": "block-outline",
   "editor.wordWrap": "on",
